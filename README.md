@@ -132,7 +132,3 @@ The app is deployed on **AWS Elastic Beanstalk**. You can access the live Swagge
 The application uses **MongoDB Atlas** as the database. Ensure you have the `MONGO_URI` environment variable set correctly in the `.env` file.
 
 ---
-
-## **License**
-
-This project is licensed under the MIT License. Feel free to use and modify it as needed.
