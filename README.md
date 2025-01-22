@@ -74,7 +74,7 @@ JWT_SECRET=student@2025
    - To run the application locally:
 
      ```bash
-     npm run start
+     npm run start:dev
      ```
 
 4. **Access API Documentation**
