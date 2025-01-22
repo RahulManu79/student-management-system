@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import routes from './routes/index.routes'
 import swaggerUi from 'swagger-ui-express';
-import docs  from '../docs/index';
+import docs  from './docs/index';
 
 // import swaggerJsdoc from 'swagger-jsdoc';
 import DB from './config/db'
