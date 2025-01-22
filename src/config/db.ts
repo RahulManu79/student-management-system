@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectDB = async () => {
+const DB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI as string,
             // {
@@ -18,4 +18,4 @@ const connectDB = async () => {
     }
 };
 
-export default connectDB;
+export default DB;

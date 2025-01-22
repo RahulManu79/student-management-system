@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
+
 import { Request, Response, NextFunction } from 'express';
 
 export const authenticate = (role: 'admin' | 'student') => {
-    return (req: Request, res: Response, next: NextFunction) => {
+    
+    return async (req: Request, res: Response, next: NextFunction) => {
 
         const token = req.headers.authorization?.split(' ')[1];
 
