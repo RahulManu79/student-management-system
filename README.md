@@ -60,7 +60,7 @@ JWT_SECRET=student@2025
 1. **Clone the Repository**
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/RahulManu79/student-management-system.git
    cd student-management-system
    ```
 
