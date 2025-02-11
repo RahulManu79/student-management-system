@@ -1,38 +1,42 @@
 name: CICD
 
 on:
-  pull_request:
-    types:
-      - closed  # ✅ Triggers when a PR is closed
+  push:
     branches:
-      - main    # ✅ Runs only if merged into `main`
+      - elastic-benstalk-ec2
 
 jobs:
   build-and-deploy:
-    if: github.event.pull_request.merged == true  # ✅ Ensures it runs only if PR is merged
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 20
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Generate Deployment Package
-        run: zip -r nodejs-app-build.zip .
+      - name: Install Type Definitions (if missing)
+        run: npm i --save-dev @types/express @types/jsonwebtoken @types/lodash @types/swagger-ui-express
 
-      - name: Deploy to EB
+      - name: Compile TypeScript
+        run: npm run build
+
+      - name: Generate Deployment Package
+        run: zip -r nodejs-app-build.zip dist package.json package-lock.json
+
+      - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: 'Student-management-system'
-          environment_name: 'Student-management-system-env'
+          application_name: 'test'
+          environment_name: 'Test-env'
           version_label: ${{ github.sha }}
           region: ap-south-1
           deployment_package: nodejs-app-build.zip
