@@ -44,4 +44,5 @@ jobs:
           application_name: 'test'
           environment_name: 'Test-env'
           version_label: ${{ github.sha }}
-          region
+          region: ap-south-1
+          deployment_package: nodejs-app-build.zip
