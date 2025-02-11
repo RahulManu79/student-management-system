@@ -1,12 +1,15 @@
 name: CICD
 
 on:
-  push:
+  pull_request:
+    types: [closed]  # Trigger only when a pull request is closed
     branches:
-      - master
+      - master       # Only trigger for pull requests targeting the master branch
 
 jobs:
   build-and-deploy:
+    # Run only if the pull request was merged (not closed without merging)
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -41,5 +44,4 @@ jobs:
           application_name: 'test'
           environment_name: 'Test-env'
           version_label: ${{ github.sha }}
-          region: ap-south-1
-          deployment_package: nodejs-app-build.zip
+          region
